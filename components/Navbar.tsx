@@ -19,7 +19,7 @@ export default function Navbar() {
           href="/"
           className="text-lg font-semibold tracking-tight text-white transition-smooth hover:text-gym-accent"
         >
-          Frontend Interview Gym
+          Frontend Interview Toolkit
         </Link>
         <ul className="flex items-center gap-1">
           {nav.map(({ href, label }) => (
