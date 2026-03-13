@@ -13,7 +13,7 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Frontend Interview Gym",
+  title: "Frontend Interview Toolkit",
   description: "Practice frontend interview questions by topic and difficulty.",
 };
 

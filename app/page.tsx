@@ -21,7 +21,7 @@ export default function HomePage() {
       </section>
       <section className="text-center">
         <h1 className="text-4xl font-bold tracking-tight text-white md:text-5xl">
-          Frontend Interview Gym
+          Frontend Interview Toolkit
         </h1>
         <p className="mt-4 text-lg text-zinc-400">
           Practice JavaScript, React, HTML & CSS by topic and difficulty. Reveal answers, code in-browser, and track your progress.
