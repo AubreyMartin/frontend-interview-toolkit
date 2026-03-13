@@ -1,4 +1,4 @@
-# Frontend Interview Gym
+# Frontend Interview Toolkit
 
 Practice frontend interview questions by **topic** (JavaScript, React, HTML, CSS) and **difficulty** (Rookie, Mid, Pro).
 
