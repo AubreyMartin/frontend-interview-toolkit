@@ -6,6 +6,7 @@ import { cn } from "@/lib/utils";
 const nav = [
   { href: "/", label: "Home" },
   { href: "/exercises", label: "Exercises" },
+  { href: "/exercises/realtime", label: "Real-time coding" },
   { href: "/topics", label: "Topics" },
   { href: "/interview", label: "Simulate Interview" },
   { href: "/progress", label: "Progress" },
@@ -28,7 +29,9 @@ export default function Navbar() {
                 href={href}
                 className={cn(
                   "rounded-md px-3 py-2 text-sm font-medium transition-smooth hover:bg-gym-border hover:text-white",
-                  href === "/exercises" ? "text-cyan-400 hover:text-cyan-300" : "text-zinc-400"
+                  href === "/exercises"
+                    ? "text-cyan-400 hover:text-cyan-300"
+                    : "text-zinc-400"
                 )}
               >
                 {label}
