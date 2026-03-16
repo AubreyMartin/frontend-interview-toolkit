@@ -103,6 +103,22 @@ export default function HomePage() {
           Your progress
         </Link>
       </section>
+
+      <footer className="border-t border-gym-border pt-6 text-center text-xs text-zinc-500">
+        <p className="mb-1">
+          Built by <span className="font-medium text-zinc-300">Aubrey Martin</span>
+        </p>
+        <p>
+          Reviewed by{" "}
+          <span className="font-medium text-zinc-300">
+            Jude Martin
+          </span>{" "}
+          and{" "}
+          <span className="font-medium text-zinc-300">
+            Miguel larruada
+          </span>
+        </p>
+      </footer>
     </div>
   );
 }
