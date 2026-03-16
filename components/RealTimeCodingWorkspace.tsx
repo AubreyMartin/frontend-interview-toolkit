@@ -12,12 +12,14 @@ interface RealTimeCodingWorkspaceProps {
 const REALTIME_STORAGE_KEY = "realtime-coding:readme";
 
 export default function RealTimeCodingWorkspace({ className }: RealTimeCodingWorkspaceProps) {
+  const [name, setName] = useState<string>("");
   const [code, setCode] = useState<string>("// Start typing and use Run to see output\n");
   const [output, setOutput] = useState<{ logs: string[]; error: string | null } | null>(null);
   const [saved, setSaved] = useState<"idle" | "saved">("idle");
 
   const steps: string[] = [
     "Use this space to practice solving problems in real time.",
+    "Fill in your name so it appears at the top of the README for future reference.",
     "Write your code in the editor.",
     "Click Run to see console output below.",
     "Use Save README to store your current session locally.",
@@ -32,7 +34,23 @@ export default function RealTimeCodingWorkspace({ className }: RealTimeCodingWor
   const buildReadme = useCallback(
     (currentCode: string) => {
       const mdLines: string[] = [];
+      const now = new Date();
+      const date = now.toLocaleDateString();
+      const time = now.toLocaleTimeString(undefined, {
+        hour: "numeric",
+        minute: "2-digit",
+        second: "2-digit",
+        hour12: true,
+      });
+
       mdLines.push("# Real-time coding session");
+      mdLines.push("");
+      if (name.trim().length > 0) {
+        mdLines.push(`- **Name**: ${name.trim()}`);
+      }
+      mdLines.push(`- **Date**: ${date}`);
+      mdLines.push(`- **Time**: ${time}`);
+      mdLines.push("- **Environment**: Browser-based JavaScript playground");
       mdLines.push("");
       mdLines.push("## Steps");
       mdLines.push("");
@@ -48,7 +66,7 @@ export default function RealTimeCodingWorkspace({ className }: RealTimeCodingWor
       mdLines.push("");
       return mdLines.join("\n");
     },
-    [steps]
+    [name, steps]
   );
 
   const handleSaveReadme = useCallback(() => {
@@ -80,9 +98,23 @@ export default function RealTimeCodingWorkspace({ className }: RealTimeCodingWor
   return (
     <div className={cn("space-y-8", className)}>
       <section>
-        <h2 className="mb-3 text-sm font-medium uppercase tracking-wider text-zinc-500">
-          Steps
-        </h2>
+        <div className="mb-3 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+          <h2 className="text-sm font-medium uppercase tracking-wider text-zinc-500">
+            Steps
+          </h2>
+          <div className="flex flex-col gap-1 text-xs text-zinc-400 sm:text-right">
+            <label className="flex flex-col gap-1 text-left sm:text-right">
+              <span className="font-medium text-zinc-300">Your name (optional)</span>
+              <input
+                type="text"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                placeholder="e.g. Aubrey Martin"
+                className="w-full rounded-md border border-gym-border bg-gym-card px-2 py-1 text-xs text-white outline-none ring-0 focus:border-gym-accent focus:ring-1 focus:ring-gym-accent"
+              />
+            </label>
+          </div>
+        </div>
         <ol className="list-inside list-decimal space-y-2 rounded-lg border border-gym-border bg-gym-card p-4 text-zinc-300">
           {steps.map((step, index) => (
             <li key={index}>{step}</li>
