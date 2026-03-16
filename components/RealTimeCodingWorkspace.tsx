@@ -16,10 +16,12 @@ export default function RealTimeCodingWorkspace({ className }: RealTimeCodingWor
   const [code, setCode] = useState<string>("// Start typing and use Run to see output\n");
   const [output, setOutput] = useState<{ logs: string[]; error: string | null } | null>(null);
   const [saved, setSaved] = useState<"idle" | "saved">("idle");
+  const [questionText, setQuestionText] = useState<string>("");
 
   const steps: string[] = [
     "Use this space to practice solving problems in real time.",
     "Fill in your name so it appears at the top of the README for future reference.",
+    "Add the interview question in the Question area below.",
     "Write your code in the editor.",
     "Click Run to see console output below.",
     "Use Save README to store your current session locally.",
@@ -52,6 +54,12 @@ export default function RealTimeCodingWorkspace({ className }: RealTimeCodingWor
       mdLines.push(`- **Time**: ${time}`);
       mdLines.push("- **Environment**: Browser-based JavaScript playground");
       mdLines.push("");
+      if (questionText.trim().length > 0) {
+        mdLines.push("## Question");
+        mdLines.push("");
+        mdLines.push(questionText.trim());
+        mdLines.push("");
+      }
       mdLines.push("## Steps");
       mdLines.push("");
       steps.forEach((s, idx) => {
@@ -66,7 +74,7 @@ export default function RealTimeCodingWorkspace({ className }: RealTimeCodingWor
       mdLines.push("");
       return mdLines.join("\n");
     },
-    [name, steps]
+    [name, questionText, steps]
   );
 
   const handleSaveReadme = useCallback(() => {
@@ -120,6 +128,19 @@ export default function RealTimeCodingWorkspace({ className }: RealTimeCodingWor
             <li key={index}>{step}</li>
           ))}
         </ol>
+        <div className="mt-4 space-y-2">
+          <label className="text-sm font-medium uppercase tracking-wider text-zinc-500">
+            Question
+          </label>
+          <div className="rounded-lg border border-gym-border bg-gym-card p-3 text-sm text-zinc-200">
+            <textarea
+              value={questionText}
+              onChange={(e) => setQuestionText(e.target.value)}
+              className="h-32 w-full resize-none bg-transparent font-normal outline-none"
+              placeholder={"Add your question here for reference..."}
+            />
+          </div>
+        </div>
       </section>
 
       <section>
